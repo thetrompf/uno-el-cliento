@@ -3,14 +3,15 @@ define [
 	'jquery'
 	'sammy'
 	'app/home/view_model'
-], (ko, $, Sammy, HomeViewModel) ->
+	'ext/knockout/text-templateengine'
+], (ko, $, Sammy, HomeViewModel, TextTemplateEngine) ->
 	'use strict'
 	class Application
 
 		initialize: () ->
 			console.log 'init Application'
+			ko.setTemplateEngine(new TextTemplateEngine())
 			@initRouter()
-			@initLinkHandler()
 			@router.run @getRoute()
 
 		initRouter: () ->
@@ -18,11 +19,13 @@ define [
 			self = @
 			@router = Sammy '#main-container', () ->
 				@get '/', () =>
-					@runRoute 'get', '#/home'
-				@get '#/home', () =>
-					self.view_model = new HomeViewModel
+					@runRoute 'get', '/home'
+				@get '/home', () =>
+					self.view_model = HomeViewModel()
 					ko.applyBindings self.view_model
-					self.view_model.name 'erik'
+				@get '/todos', () =>
+					self.view_model = HomeViewModel()
+					ko.applyBindings self.view_model
 
 
 		initLinkHandler: () ->
@@ -35,6 +38,4 @@ define [
 
 		getRoute: () ->
 			path = window.location.pathname
-			hash = window.location.hash
-			return path+hash if hash isnt ""
-			return path+"#"
+			return path
