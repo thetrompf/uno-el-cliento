@@ -7,8 +7,8 @@ if [ ! -d "public/css" ]; then
 fi
 lessc cliento/less/app.less public/css/app.css
 
-echo "Compiling client coffee..."
+echo "Compiling client..."
 coffee -c -b -o public/js/ cliento/coffee/
 
-echo "Compiling server coffee..."
+echo "Compiling server..."
 coffee -c server/

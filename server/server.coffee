@@ -25,7 +25,7 @@ app.configure 'development', () ->
 app.configure 'production', () ->
 	app.use express.errorHandler()
 
-app.get '/', (req,res) ->
+app.get /^.*$/, (req,res) ->
 	res.render 'index.html'
 
 app.listen 8080, () ->

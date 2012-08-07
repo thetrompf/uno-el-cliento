@@ -1,1 +1,3 @@
-nodemon server/server.js
+./build.sh
+cd server
+nodemon server.js
