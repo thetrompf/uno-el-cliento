@@ -9,9 +9,9 @@ app.configure () ->
 	app.use express.session
 		secret: '&8d@dsg562#nv+='
 	app.set 'view engine', 'html'
-	app.set 'views', __dirname + '/public/tmpl'
+	app.set 'views', __dirname + '/../public/tmpl'
 	app.set 'view options', layout: false
-	app.use express.static __dirname + '/public'
+	app.use express.static __dirname + '/../public'
 	app.register '.html',
 		compile: (str, options) ->
 			return (locals) ->

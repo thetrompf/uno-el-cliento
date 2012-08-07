@@ -11,4 +11,4 @@ echo "Compiling client coffee..."
 coffee -c -b -o public/js/ cliento/coffee/
 
 echo "Compiling server coffee..."
-coffee -c server.coffee
+coffee -c server/
