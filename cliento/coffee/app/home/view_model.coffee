@@ -1,61 +1,48 @@
 define [
-	'knockout'
-	'text!/tmpl/persons.html'
-	'text!/tmpl/person.html'
-], (ko, personsTemplate, personTemplate) ->
+	'base/viewmodel'
+], (ViewModel) ->
 	'use strict'
-	HomeViewModel = () ->
-		model =
-			names: ko.observableArray([
-				{
-					name: 'erik'
-					lastName: 'eriksen'
-				}
-				{
-					name: 'hans'
-					lastName: 'hansen'
-				}
-				{
-					name: 'michael'
-					lastName: 'michaelsen'
-				}
-			])
+	class HomeViewModel extends ViewModel
 
-			newName: ko.observable('')
-			newLastName: ko.observable('')
+		name: 'home'
 
-			selectedTemplate: ko.observable('personTemplate')
+		properties: () ->
+			names: @observable [
+						{
+							name: 'erik'
+							lastName: 'eriksen'
+						}
+						{
+							name: 'hans'
+							lastName: 'hansen'
+						}
+						{
+							name: 'michael'
+							lastName: 'michaelsen'
+						}
+					]
 
-		model.namesCount = ko.computed(() ->
-			return @names().length
-		, model)
+			namesCount: @computed () ->
+				return @names().length
 
-		return (() ->
-			@addName = () ->
+			addName: () ->
 				@names.push
 					name: @newName()
 					lastName: @newLastName()
 
-				@newName('')
-				@newLastName('')
+				@newName ''
+				@newLastName ''
 
-			@removeName = (name) =>
-				@names.remove name
+			removeName: (name) => @names.remove name
 
-			result = {
-				viewModel: @
-				templates:
-					personTemplate: personTemplate
-					template: personsTemplate
-			}
+			getTemplate: (it) => @tmpl()
 
-			@getTemplate = (person) => @selectedTemplate()
+			toggleTemplate: () =>
+				@tmpl(if @tmpl() == '/tmpl/person.html' then '/tmpl/person2.html' else '/tmpl/person.html')
 
-			@changeTemplate = () =>
-				require ['text!/tmpl/person2.html'], (tmpl) =>
-					result.templates.personTemplate2 = tmpl
-					value = if @selectedTemplate() == 'personTemplate' then 'personTemplate2' else 'personTemplate'
-					@selectedTemplate(value)
 
-			return result
-		).call model
+			newName: @observable ''
+			newLastName: @observable ''
+
+			tmpl: @observable '/tmpl/person.html'
+
