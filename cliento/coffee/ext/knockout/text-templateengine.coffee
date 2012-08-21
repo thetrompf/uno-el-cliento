@@ -39,6 +39,9 @@ define ['stock-knockout'], (ko) ->
 
 		templateName = templateName(bindingContext.$data) if (typeof templateName) == 'function'
 
+		unless templateName?
+			return oldTemplateUpdate element, valueAccessor, allBindingsAccessor, viewModel, bindingContext
+
 		templatePath = 'text!'+templateName
 
 		if not koTemplates[templateName]?
