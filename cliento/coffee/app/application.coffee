@@ -29,22 +29,12 @@ define [
 			ko.applyBindings @
 
 			@url.subscribe (value) =>
-				@router.setLocation value
+				if @router.getLocation() != value
+					@router.setLocation value
 
 			@router.run()
-
-			$(document).undelegate 'a', 'click.history-' + @router.eventNamespace()
-			lp = Sammy.DefaultLocationProxy
-			$(document).delegate 'a', 'click', (e) =>
-				that = e.currentTarget
-				if e.isDefaultPrevented() || e.metaKey || e.ctrlKey
-					return
-				fullPath = lp.fullPath that
-
-				if that.hostname == window.location.hostname && @router.lookupRoute('get', fullPath) && that.target != '_blank'
-					e.preventDefault()
-					@url(fullPath)
-					return false
+			@router.bind 'location-changed', () =>
+				@url @router.getLocation()
 
 
 		initRouter: () ->
