@@ -8,63 +8,28 @@
 </head>
 <body>
 
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container-fluid">
 			<div class="container">
-				<ul class="nav">
-					<li data-bind="css: { active: homeActive }"><a href="/home">Home</a></li>
-					<li data-bind="css: { active: todoActive }"><a href="/todos">ToDos</a></li>
-					<li><a href="/faq">F.A.Q.</a></li>
-					<li><a href="/references">#references</a></li>
-					<li><a href="/git">git.</a></li>
-					<li><a href="http://google.com" target="_top">@Google</a></li>
+				<ul class="nav" data-bind="foreach: topmenu">
+					<li data-bind="css: { active: isActive }">
+						<a data-bind="text: title, attr: { href: url }"></a>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="container-fluid" id="main-container">
-	<div id="todo-main-container" class="container">
-		<div class="row-fluid">
-			<div class="span6">
-				<section>
-					<div class="section-header">
-						<h3>Editor 1</h3>
-					</div>
-					<div class="section-content" data-bind="template: { name: '/tmpl/persons.html', data: editor1, if: homeActive }"></div>
-					<div class="section-content" data-bind="template: { name: '/tmpl/todos.html', data: editor1, if: todoActive }"></div>
-				</section>
-				<section>
-					<div class="section-header">
-						<h3>Editor 2</h3>
-					</div>
-					<div class="section-content">
-
-					</div>
-				</section>
-			</div>
-			<div class="span6">
-				<section>
-					<div class="section-header">
-						<h3>Context 1</h3>
-					</div>
-					<div class="section-content">
-
-					</div>
-				</section>
-				<section>
-					<div class="section-header">
-						<h3>Context 2</h3>
-					</div>
-					<div class="section-content">
-
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-</div>
+<!-- <div
+	class="container-fluid"
+	id="main-container"
+	data-bind="template: {
+							name: tmpl,
+							data: page,
+							if: showPage
+						}"
+></div> -->
 </body>
 </html>
