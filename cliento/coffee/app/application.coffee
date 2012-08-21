@@ -3,22 +3,25 @@ define [
 	'jquery'
 	'sammy'
 	'base/viewmodel'
-], (ko, $, Sammy, ViewModel) ->
+	'app/topmenu/item'
+], (ko, $, Sammy, ViewModel, MenuItem) ->
 	'use strict'
 	class Application extends ViewModel
 
 		properties: () ->
+			url = @observable @getRoute()
 
-			editor1: @observable null
+			topmenu: [
+				new MenuItem(url, '/home', 'Home')
+				new MenuItem(url, '/todo', 'Todo')
+			]
 
-			activeEditor1: @computed () -> @editor1()?.name
-			homeActive: @computed () ->
-				@activeEditor1() == 'home'
-			todoActive: @computed () ->
-				@activeEditor1() == 'todo'
+			isActive: @computed () ->
+				console.log arguments...
+				false
 
-
-			url: @observable @getRoute()
+			page: @observable null
+			url: url
 
 		initialize: () ->
 
@@ -45,10 +48,10 @@ define [
 					@runRoute 'get', '/home'
 				@get '/home', () =>
 					require ['app/home/view_model'], (VM) ->
-						self.editor1(new VM)
-				@get '/todos', () =>
+						self.page(new VM)
+				@get '/todo', () =>
 					require ['app/todo/view_model'], (VM) ->
-						self.editor1(new VM)
+						self.page(new VM)
 
 		getRoute: () ->
 			path = window.location.pathname

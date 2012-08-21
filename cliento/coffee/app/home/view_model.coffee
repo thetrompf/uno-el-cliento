@@ -7,6 +7,8 @@ define [
 		name: 'home'
 
 		properties: () ->
+			pageUrl: '/home'
+
 			names: @observable [
 						{
 							name: 'erik'

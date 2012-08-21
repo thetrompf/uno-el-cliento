@@ -28,5 +28,14 @@ app.configure 'production', () ->
 app.get /^.*$/, (req,res) ->
 	res.render 'index.html'
 
+app.post /^.*$/, (req, res) ->
+	res.render 'index.html'
+
+app.put /^.*$/, (req, res) ->
+	res.render 'index.html'
+
+app.delete /^.*$/, (req, res) ->
+	res.render 'index.html'
+
 app.listen 8080, () ->
 	console.log "Express server listen on port %d in %s mode", app.address().port, app.settings.env
