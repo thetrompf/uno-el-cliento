@@ -7,7 +7,7 @@ echo "Building project"
 ./build.sh
 
 echo "Starting server"
-cd ../server/build
+cd ../serverto/build
 nodemon app.js
 
 exit 0

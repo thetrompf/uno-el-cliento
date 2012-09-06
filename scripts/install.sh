@@ -16,7 +16,7 @@ echo "Installing NodeMon"
 npm install -g nodemon
 
 echo "Installing dependencies to the server"
-cd ../server/build
+cd ../serverto/build
 npm install
 
 cd ../..

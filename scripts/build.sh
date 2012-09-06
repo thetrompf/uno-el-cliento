@@ -13,7 +13,7 @@ mkdir -p ../public/styles
 lessc ../cliento/styles/style.less > ../public/styles/style.css
 
 echo "Building server"
-coffee -b -c -o ../server/build ../server/source
+coffee -b -c -o ../serverto/build ../serverto/source
 
 echo "Done!"
 exit 0

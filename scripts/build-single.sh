@@ -1,6 +1,4 @@
 #!/bin/bash
-# echo $@
-
 DS=$1                                   # / or \\
 
 BASE=$2                                 # D:\workspace\coffee
@@ -12,6 +10,7 @@ INPUTDIR=${INPUTFILE%%"$DS$FILENAME"}   # D:\workspace\coffee\client\scripts\app
 RELATIVE=${INPUTFILE:${#BASE}+1}        # client\scripts\app\bootstrap.coffee
 MODE=${RELATIVE%%"$DS"*}                # client
 
+# echo $@
 # echo "DS:             $DS"
 # echo "BASE:           $BASE"
 # echo "INPUTFILE:      $INPUTFILE"
@@ -22,7 +21,7 @@ MODE=${RELATIVE%%"$DS"*}                # client
 # echo "MODE:           $MODE"
 
 case $MODE in
-	server)
+	serverto)
 
 		MODESERVER="${MODE}${DS}source"
 		BUILDDIR="${BASE}${DS}${MODE}${DS}build"

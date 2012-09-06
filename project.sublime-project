@@ -6,7 +6,7 @@
 			"path": "./config"
 		},
 		{
-			"name": "Client",
+			"name": "Cliento",
 			"path": "./cliento/scripts"
 		},
 		{
@@ -14,8 +14,8 @@
 			"path": "./cliento/styles"
 		},
 		{
-			"name": "Server",
-			"path": "./server/source"
+			"name": "Serverto",
+			"path": "./serverto/source"
 		},
 		{
 			"name": "Migrations",
