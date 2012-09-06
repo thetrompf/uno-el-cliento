@@ -20,5 +20,9 @@
 	</div>
 </div>
 
+<div class="container-fluid">
+	<div class="container" data-bind="template: { name: viewModel().template, data: viewModel }"></div>
+</div>
+
 </body>
 </html>

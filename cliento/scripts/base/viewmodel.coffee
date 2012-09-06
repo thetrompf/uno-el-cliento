@@ -13,4 +13,4 @@ define [
 
 		computed: (fn, opts = deferEvaluation: true ) -> ko.computed fn, @, opts
 
-		properties: () -> []
+		properties: () -> arguments

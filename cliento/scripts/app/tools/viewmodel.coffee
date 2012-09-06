@@ -2,12 +2,12 @@ define [
 	'base/viewmodel'
 ], (ViewModel) ->
 	'use strict'
-	class TodoViewModel extends ViewModel
+	class FaqViewModel extends ViewModel
 
 		properties: () ->
-			_template : @observable 'app/todo/index.jshtml'
+			_template : @observable 'app/tools/index.jshtml'
 			template  : () => @_template()
 
 		constructor: () ->
 			super
-			log 'init TodoViewModel'
+			log 'init ToolsViewModel'

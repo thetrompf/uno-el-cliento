@@ -1,27 +1,26 @@
 define [
 	'base/viewmodel'
-	'knockout'
-], (ViewModel) ->
+	'underscore'
+], (ViewModel, _) ->
 	'use strict'
 	class TopmenuViewModel extends ViewModel
-
-		constructor: (@url) ->
-			log 'init TopmenuViewModel'
-			@url = ''
-			super
 
 		delegateUrl: (url) ->
 			@url = url
 
+		constructor: () ->
+			super
+			log 'init TopmenuViewModel'
+
 		properties: () ->
-			tmpl: @observable 'app/topmenu/index.jshtml'
-			template: () => @tmpl()
+			_template: @observable 'app/topmenu/index.jshtml'
+			template: () => @_template()
 			items: @observable [
 				@observable
 					content: '#Home'
 					href: '/home'
 					isActive: @computed () ->
-						/^\/home/.test @url()
+						(/^\/home/.test @url()) || (/^\/$/.test @url())
 
 				@observable
 					content: ':ToDo'

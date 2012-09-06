@@ -1,6 +1,6 @@
 requirejs.config
 	
-	baseUrl:            'scripts'
+	baseUrl:            '/scripts'
 	
 	paths:
 		'bootstrap'      : 'vendor/bootstrap-2.1.0'
@@ -31,13 +31,4 @@ requirejs [
 	'app/application'
 ], (Application) ->
 	'use strict'
-
-	window.DEBUG = true
-
-	window.log = () ->
-		if window.DEBUG
-			console.log arguments...
-
-	#jQuery, canvas and the app/sub module are all
-	#loaded and can be used here now.
-	new Application
+	Application
