@@ -1,0 +1,1 @@
+<li data-bind="css: { active: isActive }"><a data-bind="attr: { href: href, 'data-href': href }, text: content"></a></li>

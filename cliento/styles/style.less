@@ -1,0 +1,36 @@
+@import "bootstrap/bootstrap.less";
+@import "jquery-ui/jquery.ui.all.css";
+
+body {
+	padding-top: 40px;
+}
+
+#wrapper > div.container {
+	display: block;
+  padding: 4px;
+  line-height: @baseLineHeight;
+  border: 1px solid #ddd;
+  .box-shadow(0 1px 3px rgba(0,0,0,.055));
+  .transition(all .2s ease-in-out);
+}
+
+.file-input-btn {
+	position: relative;
+	overflow: hidden;
+	float: left;
+	margin-right: 4px;
+
+	input {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 0;
+		border: solid transparent;
+		border-width: 0 0 100px 200px;
+		opacity: 0;
+		filter: alpha(opacity=0);
+		-moz-transform: translate(-300px, 0) scale(4);
+		direction: ltr;
+		cursor: pointer;
+	}
+}
