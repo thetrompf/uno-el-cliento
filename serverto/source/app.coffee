@@ -27,7 +27,7 @@ app.get /^\/((?!rest)(?!scripts)(?!styles)(?!images).)*$/, (req, res) ->
 	res.render 'home/index'
 
 app.get '/rest/forum', (req, res) ->
-	res.end
+	res.send
 		categories: [
 			{
 				name: 'Test Category 1'

@@ -14,7 +14,7 @@
 		<div class="container-fluid">
 			<div class="container">
 				<a href="javascript:false" class="brand">@uec</a>
-				<ul class="nav" data-bind="template: { name: topmenu().template, foreach: topmenu().items, animate: false } "></ul>
+				<ul class="nav" data-bind="template: { name: topmenu().template, foreach: topmenu().items, animate: true } "></ul>
 			</div>
 		</div>
 	</div>
