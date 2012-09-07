@@ -1,3 +1,6 @@
+INSTALL
+=======
+
 Just run:
 
     scripts/install.sh
