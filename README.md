@@ -1,5 +1,5 @@
 "Uno el Cliento"
-==============
+================
 
 "Uno el Cliento" - is the code name for a new client side application framework.
 Put shortly - we absolutely *love* the philosophy behind [KnockoutJS](http://www.knockoutjs.com),
@@ -11,3 +11,8 @@ we're hoping the framework will enable structured web applications with great us
 and low friction development to be created with ease.
 
 The project is still very young and ideas are still being implemented.
+
+References
+==========
+
+* [Installation](https://github.com/thetrompf/uno-el-cliento/blob/master/INSTALL.md)
