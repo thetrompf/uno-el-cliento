@@ -1,4 +1,4 @@
 public/
 node_modules/
 *.sublime-workspace
-server/*.js
+serverto/build/

@@ -2,16 +2,65 @@
 	"folders":
 	[
 		{
-			"path": "."
+			"name": "Config",
+			"path": "./config"
+		},
+		{
+			"name": "Cliento",
+			"path": "./cliento/scripts"
+		},
+		{
+			"name": "Styles",
+			"path": "./cliento/styles"
+		},
+		{
+			"name": "Serverto",
+			"path": "./serverto/source"
+		},
+		{
+			"name": "Migrations",
+			"path": "./server/migrations"
+		},
+		{
+			"name": "Tasks",
+			"path": "./tasks"
+		},
+		{
+			"name": "Scripts",
+			"path": "./scripts"
+		},
+		{
+			"name": "Public",
+			"path": "./public"
 		}
 	],
+	"settings":
+	{
+		"tab_size": 2
+	},
 	"build_systems":
 	[
 		{
-			"name": "uno-el-cliento",
-			"cmd": ["$project_path/build.sh"],
+			"name": "build.sh",
+			"cmd": ["${project_path}/scripts/build-single.sh / ${project_path} ${file}"],
+			"working_dir": "${project_path}",
 			"shell": true,
-			"working_dir": "$project_path"
+			"selector": "source.coffee, text.html, source.js, source.css, source.css.less",
+
+			"windows": {
+				"cmd": ["${project_path}/scripts/build-single.sh \\ ${project_path} ${file}"]
+			},
+
+			"variants":
+			[
+				{
+					"name": "Build All",
+					"cmd": ["${project_path}/scripts/build.sh"],
+					"working_dir": "${project_path}",
+					"shell": true,
+					"selector": ""
+				}
+			]
 		}
 	]
 }
