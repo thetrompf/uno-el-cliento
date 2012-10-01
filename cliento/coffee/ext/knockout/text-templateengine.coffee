@@ -1,65 +1,34 @@
-define ['stock-knockout'], (ko) ->
-	ExtendedNativeTemplateEngine = () ->
-		this['allowTemplateRewriting'] = false
+define ['stock-knockout', 'ext/knockout/text-templatesource'], (ko, tts) ->
+	TextTemplateEngine = () ->
+		engine = new ko.nativeTemplateEngine()
 
-	ExtendedNativeTemplateEngine.prototype = new ko.templateEngine()
+		engine.tts = tts
 
-	ExtendedNativeTemplateEngine.prototype['renderTemplate'] = (template, bindingContext, options, templateDocument) ->
-		templateNode = document.createElement 'div'
+		engine.makeTemplateSource = (template, bindingContext, options) ->
+			if (typeof template) == 'string'
+				elem = document.getElementById(template)
+				if elem?
+					return new ko.templateSources.domElement elem
+				else
+					tmplSource = engine.tts::templates[template]
+					unless tmplSource?
+						tmplSource = new engine.tts(template, options)
 
-		templateNode.innerHTML = if koTemplates[template]? then koTemplates[template] else koTemplates['nullTemplate']
+					return tmplSource
+			else if (template.nodeType == 1) || (template.nodeType == 8)
+				# Anonymous template
+				return new ko.templateSources.anonymousTemplate(template)
 
+		engine.renderTemplate = (template, bindingContext, options) ->
+			tmplSource = engine.makeTemplateSource template, bindingContext, options
 
-		templateSource = new ko.templateSources.domElement templateNode
+			return engine.renderTemplateSource(tmplSource, bindingContext, options)
 
-		return this['renderTemplateSource'](templateSource, bindingContext, options)
+		return engine
 
-	ExtendedNativeTemplateEngine.prototype['renderTemplateSource'] = (templateSource, bindingContext, options) ->
-		useNodesIfAvailable = !(ko.utils.ieVersion < 9)
-		templateNodesFunc = if useNodesIfAvailable then templateSource['nodes'] else null
-		templateNodes = if templateNodesFunc then templateSource['nodes']() else null
+	engine = new TextTemplateEngine
 
-		if templateNodes
-			return ko.utils.makeArray(templateNodes.cloneNode(true).childNodes)
-		else
-			templateText = templateSource['text']()
-			return ko.utils.parseHtmlFragment(templateText)
+	console.log "Setting template engine!"
+	ko.setTemplateEngine(engine)
 
-	koTemplates = {}
-	koTemplates['nullTemplate'] = ''
-	oldTemplateUpdate = ko.bindingHandlers['template']['update']
-	ko.bindingHandlers['template']['update'] = (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) ->
-		value = valueAccessor()
-		bindingValue = ko.utils.unwrapObservable value
-
-		if (typeof bindingValue) == "string"
-			templateName = bindingValue
-		else
-			templateName = bindingValue['name']
-
-		templateName = templateName(bindingContext.$data) if (typeof templateName) == 'function'
-
-		unless templateName?
-			return oldTemplateUpdate element, valueAccessor, allBindingsAccessor, viewModel, bindingContext
-
-		templatePath = 'text!'+templateName
-
-		if not koTemplates[templateName]?
-			run = false
-			require [templatePath], (template) ->
-				run = true
-				koTemplates[templateName] = template
-				# Force the domData to be unset - so that knockout will force a re-rendering of the template
-				lastMappingResultDomDataKey = "setDomNodeChildrenFromArrayMapping_lastMappingResult"
-				ko.utils.domData.set element, lastMappingResultDomDataKey, []
-				oldTemplateUpdate element, valueAccessor, allBindingsAccessor, viewModel, bindingContext
-			unless run
-				# Always run the old template function to ensure the correct dependencies are set
-				oldTemplateUpdate element, valueAccessor, allBindingsAccessor, viewModel, bindingContext
-		else
-			oldTemplateUpdate element, valueAccessor, allBindingsAccessor, viewModel, bindingContext
-
-
-	ko.setTemplateEngine(new ExtendedNativeTemplateEngine())
-
-	return ExtendedNativeTemplateEngine
+	return null

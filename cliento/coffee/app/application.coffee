@@ -11,33 +11,35 @@ define [
 		properties: () ->
 			url = @observable @getRoute()
 
+			home = new MenuItem(url, '/home', 'Home')
+
 			topmenu: [
-				new MenuItem(url, '/home', 'Home')
+				home,
 				new MenuItem(url, '/todo', 'Todo')
 			]
-
-			isActive: @computed () ->
-				console.log arguments...
-				false
 
 			page: @observable null
 			url: url
 
+			homeActive: home.isActive
+
 		initialize: () ->
 
 			console.log 'init Application'
+			@url.subscribe (value) =>
+				setTimeout () =>
+					if @router.getLocation() != value
+						@router.setLocation value
+				, 0
 
 			@initRouter()
 
-			ko.applyBindings @
 
-			@url.subscribe (value) =>
-				if @router.getLocation() != value
-					@router.setLocation value
 
 			@router.run()
 			@router.bind 'location-changed', () =>
 				@url @router.getLocation()
+			ko.applyBindings @
 
 
 		initRouter: () ->

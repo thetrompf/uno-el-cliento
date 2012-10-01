@@ -11,21 +11,19 @@ define [
 
 			names: @observable [
 						{
-							name: 'erik'
-							lastName: 'eriksen'
+							name: @observable 'erik'
+							lastName: @observable 'eriksen'
 						}
 						{
-							name: 'hans'
-							lastName: 'hansen'
+							name: @observable 'hans'
+							lastName: @observable 'hansen'
 						}
 						{
-							name: 'michael'
-							lastName: 'michaelsen'
+							name: @observable 'michael'
+							lastName: @observable 'michaelsen'
 						}
 					]
 
-			namesCount: @computed () ->
-				return @names().length
 
 			addName: () ->
 				@names.push
@@ -47,4 +45,9 @@ define [
 			newLastName: @observable ''
 
 			tmpl: @observable '/tmpl/person.html'
+
+		computedProperties: () ->
+			namesCount: @computed () ->
+				return @names().length
+
 

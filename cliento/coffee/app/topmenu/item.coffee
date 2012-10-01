@@ -7,5 +7,8 @@ define [
 		properties: (activeUrl, url, title) ->
 			url: @observable url
 			title: @observable title
-			isActive: @computed () -> activeUrl() == @url()
+
+
+		computedProperties: (activeUrl) ->
+			isActive: @computed	() -> activeUrl() == @url()
 
